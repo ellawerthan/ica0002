@@ -1,0 +1,19 @@
+ - name: Add user juri
+   user:
+     name: juri
+
+- name: Add user roman
+  user:
+    name: roman
+
+- name: Add key for juri from github
+  authorized_key:
+    user: juri
+    state: present
+    key: https://github.com/hudolejev.keys
+
+- name: Add key for roman from github
+  authorized_key:
+    user: roman
+    state: present
+    key: https://github.com/romankuchin.keys
