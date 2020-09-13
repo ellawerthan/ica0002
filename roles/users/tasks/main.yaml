@@ -1,6 +1,6 @@
- - name: Add user juri
-   user:
-     name: juri
+- name: Add user juri
+  user:
+    name: juri
 
 - name: Add user roman
   user:
