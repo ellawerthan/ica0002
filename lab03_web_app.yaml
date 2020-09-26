@@ -5,3 +5,8 @@
     roles:
       - agama
       - uwsgi
+    handlers:
+      - name: Restart uwsgi
+        service:
+          name: uwsgi
+          state: restarted

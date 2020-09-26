@@ -18,9 +18,3 @@
     name: uwsgi
     enabled: yes
     state: started
-
-handlers:
-  - name: Restart uwsgi
-    service:
-      name: uwsgi
-      state: restarted
