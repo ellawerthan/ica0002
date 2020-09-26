@@ -1,0 +1,26 @@
+- name: Install uwsgi
+  apt:
+    name: uwsgi
+
+- name: Install uwsgi-plugin-python3
+  apt:
+    name: uwsgi-plugin-python3
+
+- name: Add uWSGI configuration for AGAMA so application is run by user agama
+  copy:
+    src: roles/uwsgi/files/agama.ini
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+  notify:
+  - Restart uwsgi
+
+- name: Configure uWSGI to start immediately and automatically on system boot
+  service:
+    name: uwsgi
+    enabled: yes
+    state: started
+
+handlers:
+  - name: Restart uwsgi
+    service:
+      name: uwsgi
+      state: restarted
