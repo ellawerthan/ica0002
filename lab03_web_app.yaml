@@ -5,8 +5,13 @@
     roles:
       - agama
       - uwsgi
+      - nginx
     handlers:
       - name: Restart uwsgi
         service:
           name: uwsgi
+          state: restarted
+      - name: Restart nginx
+        service:
+          name: nginx
           state: restarted

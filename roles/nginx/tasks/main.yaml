@@ -6,3 +6,10 @@
   copy:
     src: roles/nginx/files/index.html
     dest: /var/www/html/index.html
+
+- name: Configure nginx as a frontend for uWSGI
+  copy:
+    src: roles/nginx/files/config
+    dest: /etc/nginx/sites-enabled/default
+  notify:
+  - Restart nginx
