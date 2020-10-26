@@ -10,6 +10,7 @@
 
 - name: Install application dependencies
   apt:
+    update_cache: yes
     name: python3-flask-sqlalchemy
 
 - name: Install agama application

@@ -1,0 +1,33 @@
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: Install mysql-server
+  apt:
+    name: mysql-server
+
+- name: Override MySQL bind configuration
+  copy:
+    src: roles/mysql/files/bind-override
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify:
+  -  Restart MySQL
+
+- name: Install python module
+  apt:
+    name: python3-pymysql
+
+- name: MySQL database
+  mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create a MySQL user
+  mysql_user:
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  
