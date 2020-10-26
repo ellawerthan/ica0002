@@ -6,6 +6,10 @@
   apt:
     name: uwsgi-plugin-python3
 
+- name: Install python module
+  apt:
+    name: python3-pymysql
+
 - name: Add uWSGI configuration for AGAMA so application is run by user agama
   template:
     src: roles/uwsgi/templates/agama.ini
