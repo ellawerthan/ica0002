@@ -9,3 +9,6 @@ ellawerthan-1
 
 [db_servers]
 ellawerthan-2
+
+[dns_server]
+ellawerthan-2

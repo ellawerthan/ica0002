@@ -1,0 +1,30 @@
+- name: Install bind9
+  apt:
+    name: bind9
+
+- name: Configure bind to start immediately and automatically on system boot
+  service:
+    name: bind9
+    enabled: yes
+    state: started
+
+- name: Configure dns forwarders
+  template:
+    src: roles/dns/templates/named.conf.options
+    dest: /etc/bind/named.conf.options
+  notify:
+    - Restart bind
+
+- name: Configure master zone
+  template:
+    src: roles/dns/templates/db.hitec
+    dest: /etc/bind/db.hitec
+  notify:
+    - Reload rndc
+
+- name: Update dns settings
+  template:
+    src: roles/dns/templates/resolv.conf
+    dest: /etc/resolv.conf
+  notify:
+    - Restart systemd-resolved

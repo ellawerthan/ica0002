@@ -1,0 +1,11 @@
+$TTL	604800
+{{ domain }}.	IN	SOA	ellawerthan-2.{{ domain }}. ubuntu.{{ domain }}. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+{{ domain }}.	IN	NS	ellawerthan-2
+ellawerthan-2	IN	A	{{ hostvars['ellawerthan-2']['ansible_default_ipv4']['address'] }}
+ellawerthan-1	IN	A	{{ hostvars['ellawerthan-1']['ansible_default_ipv4']['address'] }}

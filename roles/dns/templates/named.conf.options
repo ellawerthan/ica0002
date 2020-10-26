@@ -1,0 +1,17 @@
+acl local { {% for a in dns_local_addresses %}{{ a }}; {% endfor %} };
+
+options {
+    directory "/var/cache/bind";
+
+    allow-query { local; };
+
+    forwarders {
+      {% for f in dns_forwarders %}
+        {{ f }};
+      {% endfor %}
+    };
+    dnssec-validation no;
+    auth-nxdomain no;    # conform to RFC1035
+};
+
+
