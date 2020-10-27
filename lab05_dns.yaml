@@ -4,11 +4,11 @@
     tasks:
       - setup:
 
-  - name: DNS Server
+  - name: Bind
     hosts: dns_server
     become: yes
     roles:
-      - dns
+      - bind
     handlers:
       - name: Reload rndc
         shell:
@@ -17,6 +17,13 @@
         service:
           name: bind9
           state: restarted
+
+  - name: DNS
+    hosts: all
+    become: yes
+    roles:
+      - dns
+    handlers:
       - name: Restart systemd-resolved
         service:
           name: systemd-resolved

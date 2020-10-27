@@ -14,4 +14,9 @@ options {
     auth-nxdomain no;    # conform to RFC1035
 };
 
+zone "hitec.io" {
+type master;
+file "/etc/bind/db.hitec";
+};
+
 
