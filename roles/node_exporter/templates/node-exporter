@@ -1,0 +1,17 @@
+server {
+	listen 80 default_server;
+    server_name _;
+    root /var/www/html;
+	location / {
+		uwsgi_pass localhost:5000;
+		include uwsgi_params;
+	}
+    location /metrics {
+		proxy_pass http://127.0.0.1:9100/metrics;
+	}
+    {% if ansible_hostname in groups['prometheus'] %}
+    location /prometheus {
+        proxy_pass http://{{ ansible_hostname }}.{{ domain }}:9090;
+    }
+    {% endif %}
+}

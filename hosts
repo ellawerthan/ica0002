@@ -12,3 +12,6 @@ ellawerthan-2
 
 [dns_server]
 ellawerthan-2
+
+[prometheus]
+ellawerthan-1
