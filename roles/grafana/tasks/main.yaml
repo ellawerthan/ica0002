@@ -1,0 +1,10 @@
+- name: Install grafana
+  apt:
+    name: grafana
+
+- name: Configure nginx reverse proxy
+  template:
+    src: roles/node_exporter/templates/node-exporter
+    dest: /etc/nginx/sites-enabled/node-exporter
+  notify:
+   - Restart nginx
