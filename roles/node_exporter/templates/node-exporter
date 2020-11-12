@@ -12,10 +12,17 @@ server {
         proxy_pass http://localhost:9090;
     }
     {% endif %}
-	{% if inventory_hostname in groups['db_servers'] %}
+	{% if ansible_hostname in groups['db_servers'] %}
     location /mysql-metrics {
         proxy_pass http://localhost:9207/metrics;
     }
     {% endif %}
+	{% if ansible_hostname in groups['dns_server'] %}
+    location /bind-metrics {
+        proxy_pass http://localhost:9153/metrics;
+    }
+    {% endif %}
+	location /grafana {
+        proxy_pass http://localhost:3000;
+    }
 }
-

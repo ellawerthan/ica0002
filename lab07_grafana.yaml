@@ -9,6 +9,18 @@
     become: yes
     roles:
       - mysql_exporter
+  
+  - name: Install Bind9 exporter
+    hosts: dns_server
+    become: yes
+    roles:
+      - bind_exporter
+
+  - name: Install grafana
+    hosts: all
+    become: yes
+    roles:
+      - grafana
 
   - name: Fix Nginx node exporter proxies
     hosts: all
