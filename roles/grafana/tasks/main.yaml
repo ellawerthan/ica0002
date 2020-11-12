@@ -1,8 +1,23 @@
+- name: Add grafana repository to sources directory
+  template:
+    src: roles/grafana/templates/grafana.list
+    dest: /etc/apt/sources.list.d/grafana.list
+
+- name: Add grafana repository key
+  shell:
+    cmd: wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+
 - name: Install grafana
   apt:
     name: grafana
     update_cache: yes
 
+- name: Configure grafana
+  template:
+    src: roles/grafana/templates/grafana.ini
+    dest: /etc/grafana/grafana.ini
+  notify: Restart grafana
+  
 - name: Configure nginx reverse proxy
   template:
     src: roles/node_exporter/templates/node-exporter

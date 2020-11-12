@@ -2,6 +2,11 @@
   apt:
     name: prometheus
 
+- name: Create user for exporters
+  user:
+    name: "{{ exporter_user }}"
+    password: "{{ exporter_password }}"
+
 - name: Configure linux job
   template:
     src: roles/prometheus/templates/prometheus.yml

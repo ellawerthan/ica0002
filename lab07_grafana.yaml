@@ -4,6 +4,12 @@
     tasks:
       - setup:
   
+  - name: Prometheus
+    hosts: prometheus
+    become: yes
+    roles:
+      - prometheus
+  
   - name: Install MySQL exporter
     hosts: db_servers
     become: yes
