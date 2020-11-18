@@ -1,0 +1,6 @@
+- name: Install InfluxDB and client packages
+  apt:
+    pkg: 
+      - influxdb
+      - influxdb-client
+    update_cache: yes

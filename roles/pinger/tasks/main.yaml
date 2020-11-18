@@ -1,0 +1,11 @@
+- name: Add pinger script
+  template:
+    src: source
+    dest: /usr/local/bin/pinger
+
+- name: Create pinger service
+  template:
+    src: source
+    dest: /lib/??
+
+- name: 

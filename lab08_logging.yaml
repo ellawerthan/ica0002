@@ -1,0 +1,19 @@
+---
+  - name: Setup
+    hosts: all
+    tasks:
+      - setup:
+  
+  - name: Install InfluxDB
+    hosts: all
+    become: yes
+    roles:
+      - influxdb
+  
+  - name: Create pinger service
+    hosts: pinger
+    become: yes
+    roles:
+      - pinger
+  
+  
