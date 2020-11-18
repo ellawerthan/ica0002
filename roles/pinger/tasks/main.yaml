@@ -1,11 +1,23 @@
+- name: Create pinger user to execute service
+  user:
+    name: pinger
+
 - name: Add pinger script
   template:
-    src: source
+    src: roles/pinger/templates/pinger
     dest: /usr/local/bin/pinger
+  become_user: pinger
+
+- name: Add pinger configuration
+  template:
+    src: roles/pinger/templates/pinger.conf
+    dest: /usr/local/bin/pinger
+  become_user: pinger
 
 - name: Create pinger service
   template:
-    src: source
-    dest: /lib/??
-
-- name: 
+    src: roles/pinger/templates/service
+    dest: /etc/systemd/system/pinger.service
+  notify:
+    - Reload daemon
+  become_user: pinger
