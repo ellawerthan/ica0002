@@ -25,3 +25,4 @@ dns_local_addresses:
   - 192.168.42.0/24
   - 127.0.0.0/8
 domain: hitec.io
+backup_ip: 192.168.42.39
