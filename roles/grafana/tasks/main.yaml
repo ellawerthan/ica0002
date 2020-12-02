@@ -10,7 +10,6 @@
 - name: Install grafana
   apt:
     name: grafana
-    update_cache: yes
 
 - name: Configure grafana
   template:

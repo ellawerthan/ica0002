@@ -1,6 +1,24 @@
+- name: Set up influxdata
+  template:
+    src: roles/influxdb/templates/influxdata.list
+    dest: /etc/apt/sources.list.d/influxdata.list
+
+- name: Add apt key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
 - name: Install InfluxDB and client packages
   apt:
     pkg: 
       - influxdb
       - influxdb-client
+      - telegraf
     update_cache: yes
+
+- name: Configure Telegraf
+  template:
+    src: roles/influxdb/templates/telegraf.conf
+    dest: /etc/telegraf/telegraf.conf
+
+    

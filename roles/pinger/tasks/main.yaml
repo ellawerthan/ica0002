@@ -6,13 +6,18 @@
   template:
     src: roles/pinger/templates/pinger
     dest: /usr/local/bin/pinger
-  become_user: pinger
+  remote_user: pinger
+
+- name: Create a directory if it does not exist
+  file:
+    path: /etc/pinger
+    state: directory
 
 - name: Add pinger configuration
   template:
     src: roles/pinger/templates/pinger.conf
-    dest: /usr/local/bin/pinger
-  become_user: pinger
+    dest: /etc/pinger/pinger.conf
+  remote_user: pinger
 
 - name: Create pinger service
   template:
@@ -20,4 +25,4 @@
     dest: /etc/systemd/system/pinger.service
   notify:
     - Reload daemon
-  become_user: pinger
+  remote_user: pinger

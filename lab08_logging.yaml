@@ -5,15 +5,29 @@
       - setup:
   
   - name: Install InfluxDB
-    hosts: all
+    hosts: influxdb
     become: yes
+    gather_facts: no
     roles:
       - influxdb
+    tags:
+      - influxdb
+
+  - name: Configure Rsyslog
+    hosts: all
+    become: yes
+    gather_facts: no
+    roles:
+      - rsyslog
+    tags:
+      - rsyslog
   
   - name: Create pinger service
     hosts: pinger
     become: yes
     roles:
+      - pinger
+    tags:
       - pinger
   
   
