@@ -19,6 +19,7 @@
     name: python3-pymysql
 
 - name: MySQL database
+  become: yes
   mysql_db:
     name: "{{ mysql_database }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
@@ -30,4 +31,3 @@
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  

@@ -1,9 +1,16 @@
 ---
+  - name: Setup
+    hosts: all
+    tasks:
+      - setup:
+  
   - name: Database server
-    hosts: db_servers
     become: yes
+    hosts: db_servers
+    become_user: root
     roles:
       - mysql
+      
       
   - name: Web app
     hosts: app_servers
@@ -12,3 +19,4 @@
       - agama
       - uwsgi
       - nginx
+  

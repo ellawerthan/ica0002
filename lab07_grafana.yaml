@@ -10,11 +10,15 @@
     roles:
       - prometheus
   
- # - name: Install MySQL exporter
- #   hosts: db_servers
- #   become: yes
- #   roles:
- #     - mysql_exporter
+  - name: Install MySQL exporter
+    hosts: db_servers
+    become: yes
+    remote_user: root
+    roles:
+      - mysql
+      - mysql_exporter
+    tags:
+      - mysql
   
   - name: Install Bind9 exporter
     hosts: dns_server
