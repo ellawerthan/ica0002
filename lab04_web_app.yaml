@@ -4,13 +4,7 @@
     become: yes
     roles:
       - mysql
-    handlers:
-      - name: Restart MySQL
-        service:
-          name: mysql
-          state: restarted
-
-
+      
   - name: Web app
     hosts: app_servers
     become: yes
@@ -18,12 +12,3 @@
       - agama
       - uwsgi
       - nginx
-    handlers:
-      - name: Restart uwsgi
-        service:
-          name: uwsgi
-          state: restarted
-      - name: Restart nginx
-        service:
-          name: nginx
-          state: restarted

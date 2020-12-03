@@ -8,7 +8,7 @@
     name: mysql-server
 
 - name: Override MySQL bind configuration
-  copy:
+  template:
     src: roles/mysql/files/bind-override
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify:
