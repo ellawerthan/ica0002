@@ -16,6 +16,9 @@ ellawerthan-2
 [prometheus]
 ellawerthan-1
 
+[grafana]
+ellawerthan-2
+
 [pinger]
 ellawerthan-1
 
