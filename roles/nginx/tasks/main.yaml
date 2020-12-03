@@ -7,9 +7,10 @@
     src: roles/nginx/templates/index.html
     dest: /var/www/html/index.html
 
-# - name: Configure nginx as a frontend for uWSGI
-#   template:
-#     src: roles/nginx/templates/config
-#     dest: /etc/nginx/sites-enabled/default
-#   notify:
-#   - Restart nginx
+# Comment out if running before lab 03
+- name: Configure nginx as a frontend for uWSGI
+  template:
+    src: roles/nginx/templates/config
+    dest: /etc/nginx/sites-enabled/default
+  notify:
+    - Restart nginx
