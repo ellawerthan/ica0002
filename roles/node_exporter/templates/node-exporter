@@ -20,7 +20,7 @@ server {
     {% endif %}
 	{% if ansible_hostname in groups['dns_server'] %}
     location /bind-metrics {
-        proxy_pass http://localhost:9153/metrics;
+        proxy_pass http://localhost:9119/metrics;
     }
     {% endif %}
 	location /grafana {

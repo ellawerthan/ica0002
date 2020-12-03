@@ -11,6 +11,8 @@
   template:
     src: roles/prometheus/templates/prometheus.yml
     dest: /etc/prometheus/prometheus.yml
+  notify:
+    - Restart prometheus
 
 - name: Add argument for external accessibility
   template:

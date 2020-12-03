@@ -13,9 +13,16 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'linux'
+  - job_name: 'node'
     static_configs:
       - targets: 
       {% for host in groups['all'] %}
         - '{{ host }}.{{ domain }}:9100'
       {% endfor %}
+
+  - job_name: 'bind'
+    static_configs:
+      - targets:
+      {% for host in groups['dns_server'] %}
+        - '{{ host }}.{{ domain }}:9119'
+      {% endfor %}  
