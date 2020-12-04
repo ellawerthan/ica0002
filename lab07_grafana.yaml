@@ -38,4 +38,5 @@
     hosts: all
     become: yes
     roles:
+      - nginx_exporter
       - node_exporter

@@ -33,3 +33,10 @@ scrape_configs:
       {% for host in groups['db_servers'] %}
         - '{{ host }}.{{ domain }}:9104'
       {% endfor %}
+
+  - job_name: 'nginx'
+    static_configs:
+      - targets: 
+      {% for host in groups['all'] %}
+        - '{{ host }}.{{ domain }}:9113'
+      {% endfor %}
