@@ -1,24 +1,24 @@
-- name: Set up influxdata
-  template:
-    src: roles/influxdb/templates/influxdata.list
-    dest: /etc/apt/sources.list.d/influxdata.list
+- name: Get telegraf package
+  get_url:
+    url: https://dl.influxdata.com/telegraf/releases/telegraf_1.16.3-1_amd64.deb
+    dest: /opt/telegraf_1.16.3-1_amd64.deb
 
-- name: Add apt key
-  apt_key:
-    url: https://repos.influxdata.com/influxdb.key
-    state: present
+- name: Install telegraf package
+  apt:
+    deb: /opt/telegraf_1.16.3-1_amd64.deb
 
 - name: Install InfluxDB and client packages
   apt:
-    pkg: 
+    name: 
       - influxdb
       - influxdb-client
-      - telegraf
     update_cache: yes
 
 - name: Configure Telegraf
   template:
     src: roles/influxdb/templates/telegraf.conf
     dest: /etc/telegraf/telegraf.conf
+  notify:
+    - Restart telegraf
 
     

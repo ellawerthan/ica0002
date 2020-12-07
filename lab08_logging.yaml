@@ -3,6 +3,35 @@
     hosts: all
     tasks:
       - setup:
+
+  - name: Bind
+    hosts: dns_server
+    become: yes
+    roles:
+      - bind
+    tags: 
+      - dns
+    handlers:
+      - name: Reload rndc
+        shell:
+          cmd: rndc reload
+      - name: Restart bind
+        service:
+          name: bind9
+          state: restarted
+
+  - name: DNS
+    hosts: all
+    become: yes
+    roles:
+      - dns
+    tags:
+      - dns
+    handlers:
+      - name: Restart systemd-resolved
+        service:
+          name: systemd-resolved
+          state: restarted
   
   - name: Install InfluxDB
     hosts: influxdb

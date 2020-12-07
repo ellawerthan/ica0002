@@ -1,12 +1,12 @@
 - name: Create pinger user to execute service
   user:
-    name: pinger
+    name: "{{ pinger_user }}"
+    password: "{{ pinger_password }}"
 
 - name: Add pinger script
   template:
     src: roles/pinger/templates/pinger
     dest: /usr/local/bin/pinger
-  remote_user: pinger
 
 - name: Create a directory if it does not exist
   file:
@@ -17,7 +17,6 @@
   template:
     src: roles/pinger/templates/pinger.conf
     dest: /etc/pinger/pinger.conf
-  remote_user: pinger
 
 - name: Create pinger service
   template:
@@ -25,4 +24,4 @@
     dest: /etc/systemd/system/pinger.service
   notify:
     - Reload daemon
-  remote_user: pinger
+    - Restart pinger

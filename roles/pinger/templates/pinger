@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script contains several (more than 1) security issues.
+#  Script contains several (more than 1) security issues.
 # Find them and fix them to get bonus on exam.
 # Problem example: SQL injection.
 
