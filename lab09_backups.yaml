@@ -1,19 +1,30 @@
 ---
-  - name: Setup
-    hosts: all
-    tasks:
-      - setup:  
+- name: Setup
+  hosts: all
+  tasks:
+    - setup:  
   
-  - name: Configure DNS to resolve backup server
-    hosts: dns_server
-    become: yes
-    roles:
-      - bind
-    handlers:
-      - name: Reload rndc
-        shell:
-          cmd: rndc reload
-      - name: Restart bind
-        service:
-          name: bind9
-          state: restarted
+- name: Configure DNS to resolve backup server
+  hosts: dns_server
+  become: yes
+  roles:
+    - bind
+  tags:
+    - bind
+  handlers:
+    - name: Reload rndc
+      shell:
+        cmd: rndc reload
+    - name: Restart bind
+      service:
+        name: bind9
+        state: restarted
+  
+- name: Add backup user to all machines
+  hosts: all
+  become: yes
+  roles:
+    - backup_user
+  tags:
+    - backup
+    
