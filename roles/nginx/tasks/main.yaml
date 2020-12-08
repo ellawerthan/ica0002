@@ -8,9 +8,9 @@
     dest: /var/www/html/index.html
 
 # Comment out if running before lab 03
-- name: Configure nginx as a frontend for uWSGI
-  template:
-    src: roles/nginx/templates/config
-    dest: /etc/nginx/sites-enabled/default
-  notify:
-    - Restart nginx
+#- name: Configure nginx as a frontend for uWSGI
+#  template:
+#    src: roles/node_exporter/templates/node-exporter
+#    dest: /etc/nginx/sites-enabled/default
+#  notify:
+#    - Restart nginx
