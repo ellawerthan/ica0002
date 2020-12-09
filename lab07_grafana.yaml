@@ -32,7 +32,7 @@
     hosts: all
     become: yes
     roles:
-      - grafana
+    #  - grafana
 
   - name: Fix Nginx node exporter proxies
     hosts: all

@@ -1,0 +1,24 @@
+- name: Create grafana user for docker
+  user:
+    name: grafana_docker
+    uid: 472
+
+- name: Create grafana docker folder
+  file:
+    path : /opt/docker/grafana
+    state : directory
+    owner: grafana_docker
+    group : grafana_docker
+
+- name: Install grafana docker image
+  docker_container:
+    name: grafana
+    image: grafana/grafana
+    state: started
+    volumes:
+      - /opt/docker/grafana:/var/lib/grafana
+    published_ports:
+      - "{{ grafana_port }}:3000"
+    env:
+      GF_SERVER_ROOT_URL: "http://localhost:{{ grafana_port }}/grafana"
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"

@@ -35,8 +35,8 @@
   hosts: app_servers
   become: yes
   roles:
-    - agama
-    - uwsgi
+    # - agama
+    # - uwsgi
     - nginx
     - nginx_exporter
   tags:
@@ -62,6 +62,6 @@
   hosts: grafana
   become: yes
   roles:
-    - grafana
+  #  - grafana
   tags:
     - grafana

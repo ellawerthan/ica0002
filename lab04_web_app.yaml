@@ -16,7 +16,7 @@
     hosts: app_servers
     become: yes
     roles:
-      - agama
-      - uwsgi
+      # - agama
+      # - uwsgi
       - nginx
   
