@@ -2,7 +2,7 @@ server {
 	listen 80 default_server;
     listen 8080 default_server;
 	location / {
-        proxy_pass http://localhost:{{agama_port}}
+        proxy_pass http://localhost:{{agama_port}};
 		# uwsgi_pass localhost:5000;
 		# include uwsgi_params;
 	}

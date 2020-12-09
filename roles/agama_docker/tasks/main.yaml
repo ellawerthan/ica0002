@@ -14,6 +14,7 @@
     source: build
     build:
       path: /opt/agama
+      network: host
 
 - name: Run agama in docker container
   docker_container:
