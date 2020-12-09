@@ -6,3 +6,8 @@
     state: present
     home: /home/backup
     ssh_key_file: .ssh/id_rsa
+
+- name: Install duplicity to machines
+  apt:
+    name: duplicity
+    state: present
