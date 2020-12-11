@@ -1,0 +1,66 @@
+---
+  - name: Setup
+    hosts: all
+    tasks:
+      - setup:
+
+  - name: Prometheus
+    hosts: prometheus
+    become: yes
+    roles:
+      - prometheus
+  
+  - name: All hosts setup
+    hosts: all
+    become: yes
+    roles:
+      - users
+      - node_exporter
+      - nginx_exporter
+      - rsyslog
+      - backup
+      - docker
+    tags:
+      - all
+
+  - name: DB servers
+    hosts: db_servers
+    become: yes
+    roles:
+      - mysql
+      - mysql_exporter
+  
+  - name: Web app servers
+    hosts: app_servers
+    become: yes
+    roles:
+      - nginx
+      - nginx_exporter
+      - agama_docker
+    tags: web_app
+  
+  - name: DNS servers
+    hosts: dns_server
+    become: yes
+    roles:
+      - bind
+      - bind_exporter
+    tags:
+      - bind
+  
+  - name: Set nameserver
+    hosts: all
+    become: yes
+    roles:
+      - dns
+    tags:
+      - bind
+  
+  - name: Grafana
+    hosts: grafana
+    become: yes
+    roles:
+      - grafana_docker
+
+
+

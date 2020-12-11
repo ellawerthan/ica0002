@@ -2,6 +2,10 @@
   file:
     path: /opt/agama
     state: directory
+
+- name: Install some thing
+  apt:
+    name: python3-pymysql
     
 - name: Download dockerfile
   get_url:

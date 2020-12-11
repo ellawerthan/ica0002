@@ -3,7 +3,8 @@
     name: 
       - prometheus-node-exporter
       - nginx-core
-
+    update_cache: yes
+     
 - name: Remove default nginx
   file:
     path: /etc/nginx/sites-enabled/default
