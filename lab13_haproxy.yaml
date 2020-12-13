@@ -1,4 +1,11 @@
 ---
+  - name: Setup
+    hosts: all
+    tasks:
+      - setup:
+    tags:
+      - haproxy
+      
   - name: Run agama containers on all machines
     hosts: all
     become: yes
@@ -15,3 +22,11 @@
       - keepalived_exporter
     tags:
       - keepalived
+
+  - name: Install and configure HAProxy
+    hosts: app_servers
+    become: yes
+    roles:
+      - haproxy
+    tags:
+      - haproxy

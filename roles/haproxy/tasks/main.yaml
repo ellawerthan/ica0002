@@ -1,0 +1,15 @@
+- name: Install HAProxy
+  apt:
+    name: haproxy
+
+- name: Configure HAProxy
+  template:
+    src: roles/haproxy/templates/haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+  notify:
+    - Restart haproxy
+
+- name: Set HAProxy to start on boot
+  service:
+    name: haproxy
+    state: started
