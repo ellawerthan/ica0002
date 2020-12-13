@@ -15,7 +15,7 @@ server {
 
     {% if ansible_hostname in groups['prometheus'] %}
     location /prometheus {
-        proxy_pass http://localhost:9090/metrics;
+        proxy_pass http://localhost:9090;
     }
     {% endif %}
 	{% if ansible_hostname in groups['db_servers'] %}

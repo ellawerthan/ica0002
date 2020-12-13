@@ -6,3 +6,11 @@
       - agama_docker
     tags:
       - agama
+
+  - name: Install and configure keepalived
+    hosts: all
+    become: yes
+    roles:
+      - keepalived
+    tags:
+      - keepalived
