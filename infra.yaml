@@ -23,7 +23,7 @@
       - backup
       - docker
     tags:
-      - all
+      - every
 
   - name: DB servers
     hosts: db_servers
@@ -39,7 +39,8 @@
       - nginx
       - nginx_exporter
       - agama_docker
-    tags: web_app
+    tags: 
+      - web_app
   
   - name: DNS servers
     hosts: dns_server

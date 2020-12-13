@@ -37,4 +37,7 @@ server {
     location /keepalived-metrics {
         proxy_pass http://localhost:9165;
     }
+    location /haproxy-metrics {
+        proxy_pass http://localhost:9101;
+    }
 }

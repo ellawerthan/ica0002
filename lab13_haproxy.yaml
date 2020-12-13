@@ -24,9 +24,17 @@
       - keepalived
 
   - name: Install and configure HAProxy
-    hosts: app_servers
+    hosts: all
     become: yes
     roles:
       - haproxy
+    tags:
+      - haproxy
+  
+  - name: Start haproxy monitoring
+    hosts: all
+    become: yes
+    roles:
+      - haproxy_exporter
     tags:
       - haproxy
