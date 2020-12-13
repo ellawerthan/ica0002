@@ -40,3 +40,10 @@ scrape_configs:
       {% for host in groups['all'] %}
         - '{{ host }}.{{ domain }}:9113'
       {% endfor %}
+
+  - job_name: 'keepalived'
+    static_configs:
+      - targets: 
+      {% for host in groups['all'] %}
+        - '{{ host }}.{{ domain }}:9165'
+      {% endfor %}

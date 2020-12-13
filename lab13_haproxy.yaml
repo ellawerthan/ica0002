@@ -12,5 +12,6 @@
     become: yes
     roles:
       - keepalived
+      - keepalived_exporter
     tags:
       - keepalived

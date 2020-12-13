@@ -34,4 +34,7 @@ server {
     location /nginx-metrics {
         proxy_pass http://localhost:9113;
     }
+    location /keepalived-metrics {
+        proxy_pass http://localhost:9165;
+    }
 }

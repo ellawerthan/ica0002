@@ -9,6 +9,8 @@
     become: yes
     roles:
       - prometheus
+    tags:
+      - prometheus
   
   - name: All hosts setup
     hosts: all

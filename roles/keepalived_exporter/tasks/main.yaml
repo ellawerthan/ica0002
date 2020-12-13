@@ -1,0 +1,14 @@
+---
+- name: Download exporter package
+  unarchive:
+    src: https://github.com/cafebazaar/keepalived-exporter/releases/download/v1.1.0/keepalived-exporter-1.1.0.linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Create service for exporter
+  template:
+    src: roles/keepalived_exporter/templates/prometheus-keepalived-exporter.service
+    dest: /etc/systemd/system/prometheus-keepalived-exporter.service
+  notify:
+    - Systemctl daemon-reload
+    - Restart keepalived_exporter
