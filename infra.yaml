@@ -33,7 +33,7 @@
       - mysql_exporter
   
   - name: Web app servers
-    hosts: app_servers
+    hosts: all
     become: yes
     roles:
       - nginx
@@ -43,7 +43,7 @@
       - web_app
   
   - name: DNS servers
-    hosts: dns_server
+    hosts: dns_servers
     become: yes
     roles:
       - bind

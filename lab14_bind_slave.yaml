@@ -1,0 +1,10 @@
+---
+  - name: Set up primary/secondary DNS servers
+    hosts: dns_servers
+    become: yes
+    roles:
+      - bind
+      - bind_exporter
+      - dns
+    tags:
+      - dns

@@ -11,8 +11,15 @@ ellawerthan-1
 ellawerthan-1
 ellawerthan-2
 
-[dns_server]
+[dns_primaries]
 ellawerthan-2
+
+[dns_secondaries]
+ellawerthan-1
+
+[dns_servers:children]
+dns_primaries
+dns_secondaries
 
 [prometheus]
 ellawerthan-1
