@@ -1,0 +1,4 @@
+0 22 * * *    backup  mysqldump agama > /home/backup/backup/agama.sql
+0 22 * * *    backup  cp -a /var/lib/grafana /home/backup/backup/
+0 22 * * 0    backup  duplicity full /home/backup/backup/ rsync://ellawerthan@backup.hitec.io//home/ellawerthan
+0 22 * * 1-6  backup  duplicity incremental /home/backup/backup/ rsync://ellawerthan@backup.hitec.io//home/ellawerthan

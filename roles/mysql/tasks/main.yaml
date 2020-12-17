@@ -39,3 +39,5 @@
     name: "{{ mysql_replication_user }}"
     password: "{{ mysql_replication_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- meta: flush_handlers

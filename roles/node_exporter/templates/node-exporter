@@ -23,7 +23,7 @@ server {
         proxy_pass http://localhost:9104/metrics;
     }
     {% endif %}
-	{% if ansible_hostname in groups['dns_server'] %}
+	{% if ansible_hostname in groups['dns_servers'] %}
     location /bind-metrics {
         proxy_pass http://localhost:9119/metrics;
     }

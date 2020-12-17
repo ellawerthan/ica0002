@@ -1,7 +1,9 @@
-- name: Install bind9
+- name: Install bind9 and friends
   apt:
-    name: bind9
-
+    pkg: 
+      - bind9
+      - python3-dnspython
+    
 - name: Configure bind to start immediately and automatically on system boot
   service:
     name: bind9
@@ -14,13 +16,41 @@
     dest: /etc/bind/named.conf.options
   notify:
     - Restart bind
+
+- name: Bind primary zone
+  template:
+    src: roles/bind/templates/named.conf.local
+    dest: /etc/bind/named.conf.local
+  notify:
+    - Restart bind
   when: inventory_hostname in groups['dns_primaries']
 
-- name: Configure master zone
+- name: Bind secondary zone
+  template:
+    src: roles/bind/templates/named.conf.local.secondary
+    dest: /etc/bind/named.conf.local
+  notify:
+    - Restart bind
+  when: inventory_hostname in groups['dns_secondaries']
+
+- name: DNS zone
   template:
     src: roles/bind/templates/db.hitec
-    dest: /etc/bind/db.hitec
+    dest: /var/lib/bind/db.hitec
   notify:
     - Reload rndc
     - Restart bind
+  when: inventory_hostname in groups['dns_primaries']
+
+- meta: flush_handlers
+
+- name: Add test record
+  nsupdate:
+    key_name: "dns_update"
+    key_secret: "{{ ns_update_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ hostvars[groups['dns_primaries'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ domain }}"
+    record: "test"
+    value: 192.168.1.1
   when: inventory_hostname in groups['dns_primaries']

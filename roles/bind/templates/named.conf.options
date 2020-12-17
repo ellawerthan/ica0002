@@ -1,5 +1,15 @@
 acl local { {% for a in dns_local_addresses %}{{ a }}; {% endfor %} };
 
+key "dns_transfer" {
+	algorithm hmac-sha256;
+	secret "{{ ns_transfer_key }}";
+};
+
+key "dns_update" {
+	algorithm hmac-sha256;
+	secret "{{ ns_update_key }}";
+};
+
 options {
     directory "/var/cache/bind";
 
@@ -14,13 +24,6 @@ options {
     auth-nxdomain no;    # conform to RFC1035
 };
 
-zone "hitec.io" {
-type master;
-file "/etc/bind/db.hitec";
-};
-
 statistics-channels {
   inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
 };
-
-

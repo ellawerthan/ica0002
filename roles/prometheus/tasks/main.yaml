@@ -1,6 +1,7 @@
 - name: Install prometheus
   apt:
     name: prometheus
+    update_cache: yes
 
 - name: Create user for exporters
   user:

@@ -14,7 +14,7 @@ scrape_configs:
   - job_name: 'bind'
     static_configs:
       - targets:
-      {% for host in groups['dns_server'] %}
+      {% for host in groups['dns_servers'] %}
         - '{{ host }}.{{ domain }}:9119'
       {% endfor %}  
 
