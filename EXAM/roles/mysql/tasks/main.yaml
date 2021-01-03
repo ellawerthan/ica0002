@@ -1,0 +1,43 @@
+- name: apt packages
+  apt:
+    update_cache: yes
+    pkg:
+      - mysql-server
+      - python3-pymysql
+
+- name: Override MySQL bind configuration
+  template:
+    src: roles/mysql/templates/bind-override
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify:
+  -  Restart MySQL
+
+- name: MySQL database
+  become: yes
+  mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create a MySQL user
+  mysql_user:
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create a replication user
+  mysql_user:
+    priv: "*.*:REPLICATION SLAVE"
+    host: "%"
+    name: "{{ mysql_replication_user }}"
+    password: "{{ mysql_replication_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+# flush handlers to restart mysql in case role is used with others that depend on it
+- meta: flush_handlers
+
+- name: Enabled
+  service:
+    name: mysql
+    state: started

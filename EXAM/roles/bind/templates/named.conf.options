@@ -1,0 +1,29 @@
+acl local { {% for a in dns_local_addresses %}{{ a }}; {% endfor %} };
+
+key "dns_transfer" {
+	algorithm hmac-sha256;
+	secret "{{ ns_transfer_key }}";
+};
+
+key "dns_update" {
+	algorithm hmac-sha256;
+	secret "{{ ns_update_key }}";
+};
+
+options {
+    directory "/var/cache/bind";
+
+    allow-query { local; };
+
+    forwarders {
+      {% for f in dns_forwarders %}
+        {{ f }};
+      {% endfor %}
+    };
+    dnssec-validation no;
+    auth-nxdomain no;    # conform to RFC1035
+};
+
+statistics-channels {
+  inet localhost port 8053 allow { localhost; };
+};
