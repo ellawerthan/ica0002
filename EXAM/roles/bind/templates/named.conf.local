@@ -1,6 +1,6 @@
 zone "{{ domain }}" {
   type master;
-  file "/var/lib/bind/db.hitec";
+  file "/var/lib/bind/db.{{ company_name }}";
   allow-transfer { key dns_transfer; };
   allow-update { key dns_update; };
 };

@@ -1,3 +1,5 @@
+include "/etc/bind/named.conf.keys";
+
 {% for vm in groups['dns_primaries'] %}
 server {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {
   keys { dns_transfer; };

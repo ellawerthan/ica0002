@@ -12,6 +12,14 @@
     tags:
       - users
   
+  - name: Docker
+    hosts: all
+    become: yes
+    roles:
+      - docker
+    tags:
+      - docker
+  
   - name: Mysql
     hosts: application
     become: yes
@@ -21,11 +29,45 @@
     tags:
       - mysql
 
-
   - name: Bind
     hosts: dns_servers
     become: yes
     roles:
       - bind
+      - bind_exporter
     tags:
       - bind
+
+  - name: Keepalived
+    hosts: application
+    become: yes
+    roles:
+      - keepalived
+      - keepalived_exporter
+    tags:
+      - keepalived
+  
+  - name: Haproxy
+    hosts: application
+    become: yes
+    roles:
+      - haproxy
+      - haproxy_exporter
+    tags:
+      - haproxy
+
+  - name: Agama
+    hosts: application
+    become: yes
+    roles:
+      - agama_docker
+    tags:
+      - agama
+
+  - name: Nginx
+    hosts: all
+    become: yes
+    roles:
+      - nginx_proxy
+    tags:
+      - nginx

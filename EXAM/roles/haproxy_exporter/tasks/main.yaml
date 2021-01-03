@@ -1,0 +1,8 @@
+- name: Start haproxy monitoring container
+  docker_container:
+    name: haproxy-exporter
+    image: prom/haproxy-exporter
+    state: started
+    published_ports:
+      - "9101:9101"
+    command: --haproxy.scrape-uri="http://ellawerthan-1.hitec.io/haproxy?stats;csv"

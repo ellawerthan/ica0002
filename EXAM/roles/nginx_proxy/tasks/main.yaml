@@ -1,0 +1,17 @@
+- name: Install nginx
+  apt:
+    name: nginx-core
+
+- name: Remove default nginx
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify:
+    - Restart nginx
+
+- name: Nginx config
+  template:
+    src: roles/nginx_proxy/templates/proxy
+    dest: /etc/nginx/sites-enabled/proxy
+  notify:
+   - Restart nginx

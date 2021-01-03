@@ -10,11 +10,26 @@ ellawerthan-2
 ellawerthan-3
 
 [dns_primaries]
-ellawerthan-2
+ellawerthan-3
 
 [dns_secondaries]
 ellawerthan-1
+ellawerthan-2
 
 [dns_servers:children]
 dns_primaries
 dns_secondaries
+
+[influxdb]
+ellawerthan-3
+
+[master_keepalive]
+ellawerthan-1
+
+[backup_keepalive]
+ellawerthan-2
+
+[db_servers]
+ellawerthan-1
+ellawerthan-2
+

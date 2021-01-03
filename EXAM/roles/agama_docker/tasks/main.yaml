@@ -16,7 +16,6 @@
       path: /opt/agama
       network: host
 
-# NEEDS BIND (TO CHANGE MYSQLHOST VARIABLE TO PROPER ADDRESS)
 - name: Run agama in docker container
   docker_container:
     name: agama
