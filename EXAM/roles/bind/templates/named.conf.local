@@ -1,3 +1,5 @@
+include "/etc/bind/named.conf.keys";
+
 zone "{{ domain }}" {
   type master;
   file "/var/lib/bind/db.{{ company_name }}";

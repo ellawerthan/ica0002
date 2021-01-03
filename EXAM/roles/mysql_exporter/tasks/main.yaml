@@ -7,7 +7,6 @@
     path: /var/lib/prometheus
     state: directory
     
-
 - name: Add configuration for exporter
   template:
     src: roles/mysql_exporter/templates/.my.cnf

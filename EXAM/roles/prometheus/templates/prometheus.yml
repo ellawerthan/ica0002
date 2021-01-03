@@ -35,13 +35,13 @@ scrape_configs:
   - job_name: 'keepalived'
     static_configs:
       - targets: 
-      {% for host in groups['all'] %}
+      {% for host in groups['application'] %}
         - '{{ host }}.{{ domain }}:9165'
       {% endfor %}
 
   - job_name: 'haproxy'
     static_configs:
       - targets:
-      {% for host in groups['all'] %}
+      {% for host in groups['application'] %}
         - '{{ host }}.{{ domain }}:9101'
       {% endfor %}

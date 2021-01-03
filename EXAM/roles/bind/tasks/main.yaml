@@ -45,6 +45,13 @@
   notify: Restart bind
   when: inventory_hostname in groups['dns_primaries']
 
+- name: Update dns settings
+  template:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+  notify:
+    - Restart systemd-resolved
+
 # - name: Add A record for the services' subdomains to the primary domain database
 #  nsupdate:
 #    key_algorithm: "hmac-sha256"
