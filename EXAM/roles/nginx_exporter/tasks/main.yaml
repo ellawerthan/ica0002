@@ -1,0 +1,14 @@
+---
+- name: Download exporter package
+  unarchive:
+    src: https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.8.0/nginx-prometheus-exporter-0.8.0-linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Create service for exporter
+  template:
+    src: roles/nginx_exporter/templates/prometheus-nginx-exporter.service
+    dest: /etc/systemd/system/prometheus-nginx-exporter.service
+  notify:
+    - Systemctl daemon-reload
+    - Restart nginx_exporter
