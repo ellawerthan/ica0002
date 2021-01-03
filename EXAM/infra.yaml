@@ -73,19 +73,27 @@
     tags:
       - nginx
 
-#  - name: Node exporter
-#    hosts: all
-#    become: yes
-#    roles:
-#      - node_exporter
-#    tags:
-#      - node_exporter
+  - name: Node exporter
+    hosts: all
+    become: yes
+    roles:
+      - node_exporter
+    tags:
+      - node_exporter
   
-#  - name: Prometheus
-#    hosts: internal
-#    become: yes
-#    roles:
-#      - prometheus
-#    tags:
-#      - prometheus
+  - name: Prometheus
+    hosts: internal
+    become: yes
+    roles:
+      - prometheus
+    tags:
+      - prometheus
+
+  - name: Grafana
+    hosts: internal
+    become: yes
+    roles:
+      - grafana_docker
+    tags:
+      - grafana
   
