@@ -1,0 +1,10 @@
+[Unit]
+Description=Pinger
+
+[Service]
+Restart=always
+User=pinger
+ExecStart=/usr/local/bin/pinger $ARGS
+
+[Install]
+WantedBy=multi-user.target

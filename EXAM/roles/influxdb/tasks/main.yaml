@@ -16,4 +16,5 @@
   notify:
     - Restart telegraf
 
-    
+
+# make latency db by using commands "influx", "create database latency", and "use latency"

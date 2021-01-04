@@ -96,4 +96,23 @@
       - grafana_docker
     tags:
       - grafana
+
+  - name: Influxdb
+    hosts: internal
+    become: yes
+    roles:
+      - influxdb
+      # add latency db
+      - rsyslog
+    tags:
+      - influx
+  
+  - name: Pinger
+    hosts: internal
+    become: yes
+    roles:
+      - pinger
+    tags:
+      - ping
+
   
