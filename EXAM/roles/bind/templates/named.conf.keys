@@ -1,9 +1,9 @@
-key "dns_transfer" {
+key "nstransfer.key" {
 	algorithm hmac-sha256;
 	secret "{{ ns_transfer_key }}";
 };
 
-key "dns_update" {
+key "nsupdate.key" {
 	algorithm hmac-sha256;
 	secret "{{ ns_update_key }}";
 };

@@ -52,34 +52,34 @@
   notify:
     - Restart systemd-resolved
 
-# - name: Add A record for the services' subdomains to the primary domain database
-#  nsupdate:
-#    key_algorithm: "hmac-sha256"
-#    key_name: "nsupdate.key"
-#    key_secret: "{{ update_key }}"
-#    server: "{{ hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address'] }}"
-#    zone: "{{ domain }}."
-#    record: "{{ item['subdomain'] }}.{{ domain }}."
-#    value: "{{ item['ip'] }}"
-#    type: "A"
-#  loop: "{{ a_records }}"
-#  when: inventory_hostname in groups['dns_masters']
-
-#- name: Add CNAME record for service's subdomains to the primary domain database
-#  nsupdate:
-#    key_algorithm: "hmac-sha256"
-#    key_name: "nsupdate.key"
-#    key_secret: "{{ update_key }}"
-#    server: "{{ hostvars[groups['dns_masters'][0]]['ansible_default_ipv4']['address'] }}"
-#    zone: "{{ domain }}."
-#    record: "{{ item['cname'] }}.{{ domain }}."
-#    value: "{{ item['real'] }}.{{ domain }}."
-#    type: "CNAME"
-#  loop: "{{ dns_cnames }}"
-#  when: inventory_hostname in groups['dns_masters']
-
 - name: Execute handlers preemptively
   meta: flush_handlers
+
+- name: Add A record for the services' subdomains to the primary domain database
+  nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "nsupdate.key"
+    key_secret: "{{ ns_update_key }}"
+    server: "{{ hostvars[groups['dns_primaries'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ domain }}."
+    record: "{{ item['subdomain'] }}.{{ domain }}."
+    value: "{{ item['ip'] }}"
+    type: "A"
+  loop: "{{ a_records }}"
+  when: inventory_hostname in groups['dns_primaries']
+
+- name: Add CNAME record for service's subdomains to the primary domain database
+  nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "nsupdate.key"
+    key_secret: "{{ ns_update_key }}"
+    server: "{{ hostvars[groups['dns_primaries'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ domain }}."
+    record: "{{ item['cname'] }}.{{ domain }}."
+    value: "{{ item['real'] }}.{{ domain }}."
+    type: "CNAME"
+  loop: "{{ dns_cnames }}"
+  when: inventory_hostname in groups['dns_primaries']
 
 - name: Make sure bind9 is started
   service:

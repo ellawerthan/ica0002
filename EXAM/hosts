@@ -23,6 +23,9 @@ dns_secondaries
 [influxdb]
 ellawerthan-3
 
+[prometheus]
+ellawerthan-3
+
 [master_keepalive]
 ellawerthan-1
 
