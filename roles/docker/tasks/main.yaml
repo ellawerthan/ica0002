@@ -3,6 +3,8 @@
     pkg:
       - docker.io
       - python3-docker
+    update_cache: yes
+    # upgrade: yes
 
 - name: Make sure docker is running and started on boot
   service:
