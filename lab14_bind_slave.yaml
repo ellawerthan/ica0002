@@ -8,3 +8,6 @@
       - dns
     tags:
       - dns
+
+
+## see bind role in EXAM for final master/slave config
