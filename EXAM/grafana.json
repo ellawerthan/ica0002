@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1609851861179,
+  "iteration": 1609859232368,
   "links": [],
   "panels": [
     {
@@ -186,7 +186,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Memory consumption",
+      "title": "Memory",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1217,6 +1217,450 @@
         "x": 0,
         "y": 48
       },
+      "id": 44,
+      "panels": [],
+      "title": "haproxy",
+      "type": "row"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "UP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            },
+            {
+              "from": "",
+              "id": 2,
+              "text": "DOWN",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 0,
+        "y": 49
+      },
+      "id": 40,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^haproxy_up\\{instance=\"ellawerthan\\-1\\.hitec.io:9101\", job=\"haproxy\"\\}$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.6",
+      "targets": [
+        {
+          "expr": "haproxy_up",
+          "interval": "",
+          "legendFormat": "",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "haproxy1 status",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "UP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            },
+            {
+              "from": "",
+              "id": 2,
+              "text": "DOWN",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 7,
+        "y": 49
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^keepalived_up\\{instance=\"ellawerthan\\-1\\.hitec.io:9165\", job=\"keepalived\"\\}$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.6",
+      "targets": [
+        {
+          "expr": "keepalived_up",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "keepalived1 status",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "MASTER",
+              "to": "",
+              "type": 1,
+              "value": "2"
+            },
+            {
+              "from": "",
+              "id": 2,
+              "text": "BACKUP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-orange",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 14,
+        "y": 49
+      },
+      "id": 48,
+      "options": {
+        "frameIndex": 0,
+        "showHeader": true
+      },
+      "pluginVersion": "7.3.6",
+      "targets": [
+        {
+          "expr": "keepalived_vrrp_state{instance=\"ellawerthan-1.hitec.io:9165\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "keepalived1 status",
+      "type": "table"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "UP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            },
+            {
+              "from": "",
+              "id": 2,
+              "text": "DOWN",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 0,
+        "y": 55
+      },
+      "id": 45,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^haproxy_up\\{instance=\"ellawerthan\\-2\\.hitec.io:9101\", job=\"haproxy\"\\}$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.6",
+      "targets": [
+        {
+          "expr": "haproxy_up",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "haproxy2 status",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "UP",
+              "to": "",
+              "type": 1,
+              "value": "1"
+            },
+            {
+              "from": "",
+              "id": 2,
+              "text": "DOWN",
+              "to": "",
+              "type": 1,
+              "value": "0"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 7,
+        "y": 55
+      },
+      "id": 47,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^keepalived_up\\{instance=\"ellawerthan\\-2\\.hitec.io:9165\", job=\"keepalived\"\\}$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.6",
+      "targets": [
+        {
+          "expr": "keepalived_up",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "keepalived2 status",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [
+            {
+              "from": "",
+              "id": 1,
+              "text": "MASTER",
+              "to": "",
+              "type": 1,
+              "value": "2"
+            },
+            {
+              "from": "0.5",
+              "id": 2,
+              "text": "BACKUP",
+              "to": "1.5",
+              "type": 1,
+              "value": "1"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-orange",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1.5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 14,
+        "y": 55
+      },
+      "id": 49,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.3.6",
+      "targets": [
+        {
+          "expr": "keepalived_vrrp_state{instance=\"ellawerthan-2.hitec.io:9165\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "keepalived2 status",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 61
+      },
       "id": 19,
       "panels": [],
       "title": "Nginx",
@@ -1265,7 +1709,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 49
+        "y": 62
       },
       "id": 23,
       "options": {
@@ -1314,7 +1758,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 49
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 24,
@@ -1398,7 +1842,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 70
       },
       "id": 26,
       "panels": [],
@@ -1423,7 +1867,7 @@
         "h": 9,
         "w": 11,
         "x": 0,
-        "y": 58
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 28,
@@ -1555,7 +1999,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 80
       },
       "hiddenSeries": false,
       "id": 32,
@@ -2270,7 +2714,7 @@
         "h": 24,
         "w": 24,
         "x": 0,
-        "y": 74
+        "y": 87
       },
       "id": 34,
       "options": {
@@ -2347,451 +2791,6 @@
       "timeShift": null,
       "title": "Syslog messages",
       "type": "table"
-    },
-    {
-      "collapsed": true,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 98
-      },
-      "id": 44,
-      "panels": [
-        {
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "UP",
-                  "to": "",
-                  "type": 1,
-                  "value": "1"
-                },
-                {
-                  "from": "",
-                  "id": 2,
-                  "text": "DOWN",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "red",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 0.5
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 7,
-            "x": 0,
-            "y": 1
-          },
-          "id": 40,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "/^haproxy_up\\{instance=\"ellawerthan\\-1\\.hitec.io:9101\", job=\"haproxy\"\\}$/",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.3.6",
-          "targets": [
-            {
-              "expr": "haproxy_up",
-              "interval": "",
-              "legendFormat": "",
-              "queryType": "randomWalk",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "haproxy1 status",
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "UP",
-                  "to": "",
-                  "type": 1,
-                  "value": "1"
-                },
-                {
-                  "from": "",
-                  "id": 2,
-                  "text": "DOWN",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "red",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 0.5
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 7,
-            "x": 7,
-            "y": 1
-          },
-          "id": 42,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "/^keepalived_up\\{instance=\"ellawerthan\\-1\\.hitec.io:9165\", job=\"keepalived\"\\}$/",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.3.6",
-          "targets": [
-            {
-              "expr": "keepalived_up",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "keepalived1 status",
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": null,
-                "filterable": false
-              },
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "MASTER",
-                  "to": "",
-                  "type": 1,
-                  "value": "2"
-                },
-                {
-                  "from": "",
-                  "id": 2,
-                  "text": "BACKUP",
-                  "to": "",
-                  "type": 1,
-                  "value": "1"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "semi-dark-orange",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 1.5
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 10,
-            "x": 14,
-            "y": 1
-          },
-          "id": 48,
-          "options": {
-            "frameIndex": 0,
-            "showHeader": true
-          },
-          "pluginVersion": "7.3.6",
-          "targets": [
-            {
-              "expr": "keepalived_up",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "keepalived1 status",
-          "type": "table"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "UP",
-                  "to": "",
-                  "type": 1,
-                  "value": "1"
-                },
-                {
-                  "from": "",
-                  "id": 2,
-                  "text": "DOWN",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "red",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 0.5
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 7,
-            "x": 0,
-            "y": 7
-          },
-          "id": 45,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "/^haproxy_up\\{instance=\"ellawerthan\\-2\\.hitec.io:9101\", job=\"haproxy\"\\}$/",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.3.6",
-          "targets": [
-            {
-              "expr": "haproxy_up",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "haproxy2 status",
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "UP",
-                  "to": "",
-                  "type": 1,
-                  "value": "1"
-                },
-                {
-                  "from": "",
-                  "id": 2,
-                  "text": "DOWN",
-                  "to": "",
-                  "type": 1,
-                  "value": "0"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "red",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 0.5
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 7,
-            "x": 7,
-            "y": 7
-          },
-          "id": 47,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "last"
-              ],
-              "fields": "/^keepalived_up\\{instance=\"ellawerthan\\-2\\.hitec.io:9165\", job=\"keepalived\"\\}$/",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "7.3.6",
-          "targets": [
-            {
-              "expr": "keepalived_up",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "keepalived2 status",
-          "type": "stat"
-        },
-        {
-          "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": null,
-                "filterable": false
-              },
-              "mappings": [
-                {
-                  "from": "",
-                  "id": 1,
-                  "text": "MASTER",
-                  "to": "",
-                  "type": 1,
-                  "value": "2"
-                },
-                {
-                  "from": "0.5",
-                  "id": 2,
-                  "text": "BACKUP",
-                  "to": "1.5",
-                  "type": 1,
-                  "value": "1"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "semi-dark-orange",
-                    "value": null
-                  },
-                  {
-                    "color": "green",
-                    "value": 1.5
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 10,
-            "x": 14,
-            "y": 7
-          },
-          "id": 49,
-          "options": {
-            "showHeader": true
-          },
-          "pluginVersion": "7.3.6",
-          "targets": [
-            {
-              "expr": "keepalived_vrrp_state{job=\"keepalived2\"}",
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "keepalived2 status",
-          "type": "table"
-        }
-      ],
-      "title": "haproxy",
-      "type": "row"
     }
   ],
   "refresh": false,
@@ -2913,5 +2912,5 @@
   "timezone": "",
   "title": "Infra",
   "uid": "juO3LHpMz",
-  "version": 5
+  "version": 12
 }
