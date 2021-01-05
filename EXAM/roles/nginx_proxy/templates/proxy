@@ -33,10 +33,13 @@ server {
     }
     {% if ansible_hostname in groups['application'] %}
     location /keepalived-metrics {
-        proxy_pass http://localhost:9165;
+     	proxy_pass http://localhost:9165/metrics;
     }
     location /haproxy-metrics {
-        proxy_pass http://localhost:9101;
+     	        proxy_pass http://localhost:9101/metrics;
     }
+    location /haproxy {
+     	proxy_pass http://localhost:88/haproxy?stats;
+	}
     {% endif %}
 }
