@@ -42,6 +42,7 @@
     src: db.hitec
     dest: /var/lib/bind/db.{{ company_name }}
     validate: named-checkzone {{ domain }} %s
+    force: no
   notify: Restart bind
   when: inventory_hostname in groups['dns_primaries']
 
