@@ -1,0 +1,19 @@
+- name: Get telegraf package
+  apt:
+    deb: https://dl.influxdata.com/telegraf/releases/telegraf_1.16.3-1_amd64.deb
+
+- name: Install InfluxDB and client packages
+  apt:
+    name: 
+      - influxdb
+      - influxdb-client
+    update_cache: yes
+
+- name: Configure Telegraf
+  template:
+    src: roles/influxdb/templates/telegraf.conf
+    dest: /etc/telegraf/telegraf.conf
+  notify:
+    - Restart telegraf
+
+    

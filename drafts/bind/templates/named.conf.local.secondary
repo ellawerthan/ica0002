@@ -1,0 +1,15 @@
+{% for vm in groups['dns_primaries'] %}
+server {{ hostvars[vm]['ansible_default_ipv4']['address'] }} {
+  keys { dns_transfer; };
+};
+{% endfor %}
+
+zone "{{ domain }}" {
+  type slave;
+  file "/var/lib/bind/db.hitec";
+  masters {
+    {% for vm in groups['dns_primaries'] %}
+      {{ hostvars[vm]['ansible_default_ipv4']['address'] }};
+    {% endfor %}
+  };
+};

@@ -1,4 +1,3 @@
 0 22 * * *    backup  mysqldump agama > /home/backup/backup/agama.sql
-0 22 * * *    backup  cp -a /opt/docker/grafana /home/backup/backup/
 0 22 * * 0    backup  duplicity --no-encryption full /home/backup/backup/ rsync://ellawerthan@backup.hitec.io//home/ellawerthan
 0 22 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/backup/ rsync://ellawerthan@backup.hitec.io//home/ellawerthan

@@ -1,8 +1,20 @@
 - name: Start haproxy monitoring container
   docker_container:
     name: haproxy-exporter
-    image: prom/haproxy-exporter
+    image: quay.io/prometheus/haproxy-exporter:v0.9.0
     state: started
     published_ports:
       - "9101:9101"
     command: --haproxy.scrape-uri="http://ellawerthan-1.hitec.io/haproxy?stats;csv"
+    restart_policy: always
+  when: inventory_hostname == "ellawerthan-1"
+
+- name: Setup HAProxy exporter on other machine
+  docker_container:
+    name: haproxy-exporter
+    image: quay.io/prometheus/haproxy-exporter:v0.9.0
+    ports:
+      - "9101:9101"
+    command: --haproxy.scrape-uri="http://ellawerthan-2.hitec.io/haproxy?stats;csv"
+    restart_policy: always
+  when: inventory_hostname == "ellawerthan-2"

@@ -1,15 +1,5 @@
 acl local { {% for a in dns_local_addresses %}{{ a }}; {% endfor %} };
 
-key "dns_transfer" {
-	algorithm hmac-sha256;
-	secret "{{ ns_transfer_key }}";
-};
-
-key "dns_update" {
-	algorithm hmac-sha256;
-	secret "{{ ns_update_key }}";
-};
-
 options {
     directory "/var/cache/bind";
 

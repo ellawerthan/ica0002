@@ -2,9 +2,14 @@
   apt:
     name: prometheus-mysqld-exporter
 
+- name: Add ini file for exporter
+  file:
+    path: /var/lib/prometheus
+    state: directory
+    
 - name: Add configuration for exporter
   template:
-    src: roles/mysql_exporter/files/.my.cnf
+    src: roles/mysql_exporter/templates/.my.cnf
     dest: /var/lib/prometheus/.my.cnf
   notify:
     - Restart MySQL exporter
@@ -12,8 +17,8 @@
 - name: Create a MySQL user for exporter
   mysql_user:
     priv: "*.*:PROCESS,REPLICATION CLIENT,SELECT"
-    name: "{{exporter_user}}"
-    password: "{{exporter_password}}"
+    name: "{{ exporter_user }}"
+    password: "{{ exporter_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Enabled

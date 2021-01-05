@@ -1,40 +1,38 @@
-ellawerthan-1 ansible_host=193.40.156.86 ansible_port=5822 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
-ellawerthan-2 ansible_host=193.40.156.86 ansible_port=1322 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+ellawerthan-1 ansible_host=193.40.156.86 ansible_port=10022 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+ellawerthan-2 ansible_host=193.40.156.86 ansible_port=7822 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+ellawerthan-3 ansible_host=193.40.156.86 ansible_port=4122 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
 
-[web_servers]
-ellawerthan-1
-
-[app_servers]
-ellawerthan-1
-
-[db_servers]
+[application]
 ellawerthan-1
 ellawerthan-2
+
+[internal]
+ellawerthan-3
 
 [dns_primaries]
-ellawerthan-2
+ellawerthan-3
 
 [dns_secondaries]
 ellawerthan-1
+ellawerthan-2
 
 [dns_servers:children]
 dns_primaries
 dns_secondaries
 
-[prometheus]
-ellawerthan-1
-
-[grafana]
-ellawerthan-2
-
-[pinger]
-ellawerthan-1
-
 [influxdb]
-ellawerthan-2
+ellawerthan-3
+
+[prometheus]
+ellawerthan-3
 
 [master_keepalive]
 ellawerthan-1
 
 [backup_keepalive]
 ellawerthan-2
+
+[db_servers]
+ellawerthan-1
+ellawerthan-2
+

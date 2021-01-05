@@ -1,0 +1,16 @@
+- name: Install Bind9 exporter
+  apt:
+    name: prometheus-bind-exporter
+
+- name: Enabled
+  service:
+    name: prometheus-bind-exporter
+    state: started
+    enabled: yes
+
+- name: Update Bind9 configuration
+  template:
+    src: roles/bind/templates/named.conf.options
+    dest: /etc/bind/named.conf.options
+  notify:
+    - Restart bind

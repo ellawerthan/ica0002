@@ -1,56 +1,89 @@
-- name: Install bind9 and friends
+---
+- name: Intall Bind9
   apt:
-    pkg: 
+    name: 
       - bind9
       - python3-dnspython
-    
-- name: Configure bind to start immediately and automatically on system boot
-  service:
-    name: bind9
-    enabled: yes
-    state: started
+    state: present
+    force_apt_get: yes
 
-- name: Configure dns forwarders
+- name: Copy tsig keys
   template:
-    src: roles/bind/templates/named.conf.options
+    src: named.conf.keys
+    dest: /etc/bind/named.conf.keys
+    validate: named-checkconf %s
+  notify: Restart bind
+  
+- name: Configure DNS forwarders, ACL, master zone
+  template:
+    src: named.conf.options
     dest: /etc/bind/named.conf.options
-  notify:
-    - Restart bind
+    validate: named-checkconf %s
+  notify: Restart bind
 
-- name: Bind primary zone
+- name: Configure zone config for primaries
   template:
-    src: roles/bind/templates/named.conf.local
+    src: named.conf.local
     dest: /etc/bind/named.conf.local
-  notify:
-    - Restart bind
+    validate: named-checkconf %s
+  notify: Restart bind
   when: inventory_hostname in groups['dns_primaries']
 
-- name: Bind secondary zone
+- name: Configure zone config for secondaries
   template:
-    src: roles/bind/templates/named.conf.local.secondary
+    src: named.conf.local.secondary
     dest: /etc/bind/named.conf.local
-  notify:
-    - Restart bind
+    validate: named-checkconf %s
+  notify: Restart bind
   when: inventory_hostname in groups['dns_secondaries']
 
-- name: DNS zone
+- name: Configure master zone
+  template: 
+    src: db.hitec
+    dest: /var/lib/bind/db.{{ company_name }}
+    validate: named-checkzone {{ domain }} %s
+    force: no
+  notify: Restart bind
+  when: inventory_hostname in groups['dns_primaries']
+
+- name: Update dns settings
   template:
-    src: roles/bind/templates/db.hitec
-    dest: /var/lib/bind/db.hitec
+    src: resolv.conf
+    dest: /etc/resolv.conf
   notify:
-    - Reload rndc
-    - Restart bind
-  when: inventory_hostname in groups['dns_primaries']
+    - Restart systemd-resolved
 
-- meta: flush_handlers
+- name: Execute handlers preemptively
+  meta: flush_handlers
 
-- name: Add test record
+- name: Add A record for the services' subdomains to the primary domain database
   nsupdate:
-    key_name: "dns_update"
-    key_secret: "{{ ns_update_key }}"
     key_algorithm: "hmac-sha256"
+    key_name: "nsupdate.key"
+    key_secret: "{{ ns_update_key }}"
     server: "{{ hostvars[groups['dns_primaries'][0]]['ansible_default_ipv4']['address'] }}"
-    zone: "{{ domain }}"
-    record: "test"
-    value: 192.168.1.1
+    zone: "{{ domain }}."
+    record: "{{ item['subdomain'] }}.{{ domain }}."
+    value: "{{ item['ip'] }}"
+    type: "A"
+  loop: "{{ a_records }}"
   when: inventory_hostname in groups['dns_primaries']
+
+- name: Add CNAME record for service's subdomains to the primary domain database
+  nsupdate:
+    key_algorithm: "hmac-sha256"
+    key_name: "nsupdate.key"
+    key_secret: "{{ ns_update_key }}"
+    server: "{{ hostvars[groups['dns_primaries'][0]]['ansible_default_ipv4']['address'] }}"
+    zone: "{{ domain }}."
+    record: "{{ item['cname'] }}.{{ domain }}."
+    value: "{{ item['real'] }}.{{ domain }}."
+    type: "CNAME"
+  loop: "{{ dns_cnames }}"
+  when: inventory_hostname in groups['dns_primaries']
+
+- name: Make sure bind9 is started
+  service:
+    name: bind9
+    state: started
+    enabled: yes

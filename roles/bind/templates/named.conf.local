@@ -1,6 +1,8 @@
+include "/etc/bind/named.conf.keys";
+
 zone "{{ domain }}" {
   type master;
-  file "/var/lib/bind/db.hitec";
-  allow-transfer { key dns_transfer; };
-  allow-update { key dns_update; };
+  file "/var/lib/bind/db.{{ company_name }}";
+  allow-transfer { key nstransfer.key; };
+  allow-update { key nsupdate.key; };
 };
