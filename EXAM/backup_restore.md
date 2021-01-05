@@ -41,7 +41,7 @@ ansible-playbook infra.yaml -tgrafana
 
 initial user/pass is admin/admin
 dashboard json is available in EXAM directory for import
-prometheus database is at http://{{public address/port of internal machine}}/prometheus
+prometheus database is at http://prometheus.hitec.io:9090/prometheus
 influx databases are at http://influxdb.hitec.io:8086
 
 ### Telegraf/Rsyslog/pinger/InfluxDB
