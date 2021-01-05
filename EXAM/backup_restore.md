@@ -9,6 +9,13 @@ run on own device in EXAM directory
 
 ansible-playbook infra.yaml -tmysql
 
+Run the following queries on ellawerthan-2 mysql to finish setup:
+ - STOP SLAVE;
+ - CHANGE MASTER TO MASTER_HOST='ellawerthan-1.hitec.io',MASTER_USER='replication',MASTER_PASSWORD='my password (can print in debug if necessary)'
+ - RESET SLAVE;
+ - START SLAVE;
+ - SHOW SLAVE STATUS\G
+
 ### MySQL Database restore
 run on an application machine as backup
 

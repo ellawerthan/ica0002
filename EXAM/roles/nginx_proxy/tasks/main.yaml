@@ -15,3 +15,9 @@
     dest: /etc/nginx/sites-enabled/proxy
   notify:
    - Restart nginx
+
+- name: Nginx started on boot
+  service:
+    name: nginx
+    state: started
+    enabled: yes
