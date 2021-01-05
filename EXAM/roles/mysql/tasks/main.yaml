@@ -4,11 +4,20 @@
     pkg:
       - mysql-server
       - python3-pymysql
+      - mysql-client-5.7
 
 - name: Override MySQL bind configuration
   template:
     src: roles/mysql/templates/bind-override
     dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify:
+  -  Restart MySQL
+
+- name: Add backup user verification settings
+  template:
+    src: roles/mysql/templates/backup
+    dest: /home/backup/.my.cnf
+    owner: backup
   notify:
   -  Restart MySQL
 
@@ -34,6 +43,14 @@
     password: "{{ mysql_replication_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
+- name: Create a backup user
+  mysql_user:
+    priv: "{{ mysql_database }}.*:ALL"
+    host: "%"
+    name: "{{ mysql_backup_user }}"
+    password: "{{ mysql_backup_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
 # flush handlers to restart mysql in case role is used with others that depend on it
 - meta: flush_handlers
 
@@ -41,3 +58,10 @@
   service:
     name: mysql
     state: started
+
+# Run the following queries on ellawerthan-2 mysql to finish setup:
+# STOP SLAVE;
+# CHANGE MASTER TO MASTER_HOST='ellawerthan-1.hitec.io',MASTER_USER='replication',MASTER_PASSWORD='my password (can print in debug if necessary)'
+# RESET SLAVE;
+# START SLAVE;
+# SHOW SLAVE STATUS\G

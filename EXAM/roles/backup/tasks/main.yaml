@@ -5,6 +5,7 @@
     generate_ssh_key: yes
     state: present
     home: /home/backup
+    shell: "/bin/bash"
     ssh_key_file: .ssh/id_rsa
 
 - name: Add backup directory
@@ -27,3 +28,9 @@
   apt:
     name: duplicity
     state: present
+
+- name: Schedule backup scripts for MySQL machines
+  template:
+    src: backup
+    dest: /etc/cron.d/backup
+  when: inventory_hostname in groups['db_servers']

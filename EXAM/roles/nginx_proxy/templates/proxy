@@ -22,14 +22,12 @@ server {
         proxy_pass http://localhost:9119/metrics;
     }
     {% endif %}
-    {% if ansible_hostname in groups['internal'] %}
 	location /grafana {
         proxy_pass http://localhost:{{ grafana_port }};
     }
     location /prometheus {
         proxy_pass http://localhost:9090;
     }
-    {% endif %}
     location /nginx-metrics {
         proxy_pass http://localhost:9113;
     }

@@ -1,0 +1,62 @@
+## APPLICATION SERVICES
+### AGAMA
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tagama
+
+### MySQL Service
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tmysql
+
+### MySQL Database restore
+run on an application machine as backup
+
+duplicity --no-encryption restore rsync://ellawerthan@backup.hitec.io//home/ellawerthan/ /home/backup/restore/
+
+mysql agama < /home/backup/restore/agama.sql
+
+### Nginx
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tnginx
+
+## INTERNAL SERVICES
+### Prometheus
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tprometheus
+
+### Grafana
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tgrafana
+
+initial user/pass is admin/admin
+dashboard json is available in EXAM directory for import
+prometheus database is at http://{{public address/port of internal machine}}/prometheus
+influx databases are at http://influxdb.hitec.io:8086
+
+### Telegraf/Rsyslog/pinger/InfluxDB
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tinflux
+
+## BACKUP SERVICES
+
+### Duplicity
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tbackup
+
+(could take some time to gain access to backup server)
+
+### Cron
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tbackup
+
+### Bind9
+run on own device in EXAM directory
+
+ansible-playbook infra.yaml -tbind
