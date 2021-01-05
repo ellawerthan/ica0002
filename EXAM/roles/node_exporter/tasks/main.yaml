@@ -2,3 +2,8 @@
   apt:
     name: 
       - prometheus-node-exporter
+
+- name: Start exporter on boot
+  service:
+    name: prometheus-node-exporter
+    state: started

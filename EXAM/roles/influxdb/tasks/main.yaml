@@ -16,5 +16,15 @@
   notify:
     - Restart telegraf
 
+- name: Have influxdb start on boot
+  service:
+    name: influxdb
+    state: started
+
+- name: Have telegraf start on boot
+  service:
+    name: telegraf
+    state: started
+
 
 # make latency db by using commands "influx", "create database latency", and "use latency"

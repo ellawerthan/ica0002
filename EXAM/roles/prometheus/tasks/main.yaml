@@ -19,3 +19,8 @@
   template:
     src: roles/prometheus/templates/prometheus
     dest: /etc/default/prometheus
+
+- name: Start on boot
+  service:
+    name: prometheus
+    state: started
